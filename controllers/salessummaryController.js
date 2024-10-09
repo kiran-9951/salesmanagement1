@@ -5,14 +5,15 @@ const Agents = require("../models/agentModel");
 const SalesSummary = async (req, res) => {
     try {
         const agentemail = req.params.agent_email;
-
-     
+console.log(agentemail)
+    
         if (!agentemail) {
             return res.status(400).json({ message: "Agent email is required" });
         }
 
-  
+      
         const agent = await Agents.findOne({ email: agentemail });
+        console.log(agent)
         if (!agent) {
             return res.status(404).json({ message: "Agent not registered" });
         }
@@ -22,13 +23,14 @@ const SalesSummary = async (req, res) => {
             path: "productdetails.product",
             model: "Products"
         });
+        console.log(sales)
 
-      
+    
         if (sales.length === 0) {
             return res.status(404).json({ message: "No sales found for this agent" });
         }
 
-        
+      
         let totalAmount = 0;
         sales.forEach(sale => {
             sale.productdetails.forEach(productDetail => {
@@ -39,7 +41,7 @@ const SalesSummary = async (req, res) => {
             });
         });
 
-      
+     
         res.status(200).json({
             message: "Sales fetched successfully",
             totalAmount: totalAmount,
@@ -51,4 +53,4 @@ const SalesSummary = async (req, res) => {
     }
 };
 
-module.exports = SalesSummary;
+module.exports = { SalesSummary };  
