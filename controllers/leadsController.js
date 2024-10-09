@@ -1,15 +1,21 @@
 const Leads = require("../models/leadsModel")
 const Agents = require("../models/agentModel")
+const {leadsValidationSchema}= require("../validations/leadsValidation")
+const { agentValidattionSchema } = require("../validations/agentValidation")
 const Agentleads = async (req, res) => {
     try {
         const { name, email, age, phone, country, state, pincode, city, agentemail } = req.body
 
-        console.log(name, email, age, phone, country, state, pincode, city, agentemail)
+        // console.log(name, email, age, phone, country, state, pincode, city, agentemail)
 
-        if (!name || !email || !age || !phone || !country || !state || !pincode || !city) {
-            return res.status(404).json({ message: "please provide all details name, email, age, phone, country, state, pincode, city, agentemail  " })
-        }
+        // if (!name || !email || !age || !phone || !country || !state || !pincode || !city) {
+        //     return res.status(404).json({ message: "please provide all details name, email, age, phone, country, state, pincode, city, agentemail  " })
+        // }
+const {value,error} =agentValidattionSchema.validate(req.body,{abortEarly:false})
 
+if(error){
+    
+}
         if (!agentemail) {
             return res.status(404).json({ message: "agent email is required to show leads" })
         }

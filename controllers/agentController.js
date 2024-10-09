@@ -8,6 +8,7 @@ const Agentsdata = async (req, res) => {
         // if (!name || !email || !phone || !company_id) {
         //     return res.status(404).json({ message: "provide name email phone companyid" })
         // }
+        
         const {value, error} = agentValidattionSchema.validate(req.body, { abortEarly: false })
         if(error){
             const formattedErrors = error.details.map(err => ({
