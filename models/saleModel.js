@@ -1,3 +1,4 @@
+const { required } = require("joi");
 const mongoose = require("mongoose");
 const salesSchema = new mongoose.Schema({
     agentemail: {
@@ -17,11 +18,17 @@ const salesSchema = new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Products",
                 required: true
+              
             },
             quantity: {
                 type: Number,
                 required: true,
                 default: 1
+            },
+            price:{
+                type:Number,
+                ref:"Products",
+                required:true
             }
         }
     ],
