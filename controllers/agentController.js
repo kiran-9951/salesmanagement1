@@ -3,13 +3,9 @@ const { agentValidattionSchema } = require("../validations/agentValidation");
 const Agentsdata = async (req, res) => { 
     try {
         const { name, email, phone, company_id } = req.body
-        // console.log(name, email, phone, company_id)
-
-        // if (!name || !email || !phone || !company_id) {
-        //     return res.status(404).json({ message: "provide name email phone companyid" })
-        // }
-        
+       
         const {value, error} = agentValidattionSchema.validate(req.body, { abortEarly: false })
+       
         if(error){
             const formattedErrors = error.details.map(err => ({
                 field: err.context.key,

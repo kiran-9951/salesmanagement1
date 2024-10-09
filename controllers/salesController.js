@@ -1,15 +1,21 @@
 const Agents = require("../models/agentModel")
 const Leads = require("../models/leadsModel")
 const Sales = require("../models/saleModel")
+const { salesValidationSchema } = require("../validations/salesValidations")
 
 const SalesData = async (req, res) => {
     try {
         const { agentemail, customeremail, productdetails } = req.body
 
-        console.log(agentemail,customeremail,productdetails)
+        const {value,error}=salesValidationSchema.validate(req.body,{abortEarly:false})
 
-        if (!agentemail || !customeremail || !productdetails) {
-            return res.status(404).json({ message: "provide agentemail customeremail productdetails" })
+        if (error) {
+            const formattedErrors = error.details.map(err => ({
+                field: err.context.key,
+                message: err.message
+            }));
+
+            return res.status(400).json({ message: "validation failed", error: formattedErrors })
         }
 
         const agent = await Agents.findOne({ email: agentemail });
