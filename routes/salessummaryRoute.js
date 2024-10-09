@@ -3,6 +3,6 @@ const express = require("express");
 const router = express.Router();
 
 
-router.get("/summary/:agent_email", salessummaryController.SalesSummary);
+router.get("/summary/:agent_email", salessummaryController);
 
 module.exports = router;
