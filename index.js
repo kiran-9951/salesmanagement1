@@ -15,8 +15,8 @@ app.use("/api",leadsRoute)
 app.use("/api",salesRoute)
 app.use("/api",salesSummaryRoutes)
 
-const uri = "mongodb+srv://arvakirank:SrWH7xjSUoXBaeDK@cluster1.lfhhp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1"
-// const uri ="mongodb://localhost:27017/data"
+// const uri = "mongodb+srv://arvakirank:SrWH7xjSUoXBaeDK@cluster1.lfhhp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster1"
+const uri ="mongodb://localhost:27017/data"
 mongoose.connect(uri, {dbName:"data", })
     .then(() => {
         console.log("mongodb connected")
