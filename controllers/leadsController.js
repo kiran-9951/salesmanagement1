@@ -26,6 +26,13 @@ const Agentleads = async (req, res) => {
             return res.status(404).json({ message: "agent don't have anyleads" })
         }
 
+        const leadexist = await Leads.findOne({email:email})
+        const leadexists=await Leads.findOne({phone:phone})
+        if(leadexist && leadexists){
+            return res.status(404).json({message:"lead already exist"})
+        }
+
+
         const newlead = new Leads({
             name, email, age, phone, country, state, pincode, city, agentemail
 
